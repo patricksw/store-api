@@ -1,3 +1,5 @@
+using System;
+
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 
 /// <summary>

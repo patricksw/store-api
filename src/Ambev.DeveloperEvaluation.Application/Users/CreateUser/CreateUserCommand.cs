@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using MediatR;
+using System.Linq;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 

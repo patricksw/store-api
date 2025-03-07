@@ -1,9 +1,10 @@
-using System.Threading;
-using System.Threading.Tasks;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Specifications;
 using MediatR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
 {
@@ -26,7 +27,7 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
         public async Task<AuthenticateUserResult> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
-            
+
             if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.Password))
             {
                 throw new UnauthorizedAccessException("Invalid credentials");

@@ -6,6 +6,9 @@ using Ambev.DeveloperEvaluation.Unit.Domain;
 using AutoMapper;
 using FluentAssertions;
 using NSubstitute;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application;

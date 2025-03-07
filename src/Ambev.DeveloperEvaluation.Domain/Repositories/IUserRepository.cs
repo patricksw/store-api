@@ -1,4 +1,7 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Domain.Repositories;
 

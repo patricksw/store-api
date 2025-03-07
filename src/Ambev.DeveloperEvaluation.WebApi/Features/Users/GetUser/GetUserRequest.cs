@@ -1,3 +1,5 @@
+using System;
+
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
 
 /// <summary>
