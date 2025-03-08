@@ -1,4 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 

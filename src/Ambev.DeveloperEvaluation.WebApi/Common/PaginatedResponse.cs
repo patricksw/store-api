@@ -1,4 +1,6 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Common;
+﻿using System.Collections.Generic;
+
+namespace Ambev.DeveloperEvaluation.WebApi.Common;
 
 public class PaginatedResponse<T> : ApiResponseWithData<IEnumerable<T>>
 {

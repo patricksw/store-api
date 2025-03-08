@@ -1,4 +1,6 @@
 ﻿using FluentValidation.Results;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Ambev.DeveloperEvaluation.Common.Validation;
 
@@ -9,7 +11,7 @@ public class ValidationResultDetail
 
     public ValidationResultDetail()
     {
-        
+
     }
 
     public ValidationResultDetail(ValidationResult validationResult)

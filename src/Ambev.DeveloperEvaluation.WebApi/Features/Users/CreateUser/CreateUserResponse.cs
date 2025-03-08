@@ -1,4 +1,5 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
+using System;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 

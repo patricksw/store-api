@@ -1,7 +1,10 @@
-using AutoMapper;
-using MediatR;
-using FluentValidation;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using AutoMapper;
+using FluentValidation;
+using MediatR;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
@@ -19,9 +22,7 @@ public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
     /// <param name="userRepository">The user repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for GetUserCommand</param>
-    public GetUserHandler(
-        IUserRepository userRepository,
-        IMapper mapper)
+    public GetUserHandler(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
