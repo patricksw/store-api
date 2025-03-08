@@ -13,4 +13,9 @@
     <PackageReference Include="OneOf" Version="3.0.271" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Products\GetProduct\" />
+    <Folder Include="Products\DeleteProduct\" />
+  </ItemGroup>
+
 </Project>
