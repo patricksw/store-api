@@ -46,7 +46,7 @@ public class ProductsController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<CreateProductCommand>(request);
+        var command = _mapper.Map<CreateCartCommand>(request);
         var response = await _mediator.Send(command, cancellationToken);
 
         return Created(string.Empty, new ApiResponseWithData<CreateProductResponse>

@@ -7,7 +7,7 @@ public class CreateProductProfile : Profile
 {
     public CreateProductProfile()
     {
-        CreateMap<CreateProductCommand, Product>()
+        CreateMap<CreateCartCommand, Product>()
             .ForMember(dest => dest.RatingRate, opt => opt.MapFrom(src => src.Rating.Rate))
             .ForMember(dest => dest.RatingCount, opt => opt.MapFrom(src => src.Rating.Count));
         CreateMap<Product, CreateProductResult>()

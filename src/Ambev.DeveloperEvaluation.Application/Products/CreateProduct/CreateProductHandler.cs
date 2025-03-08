@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
-public class CreateProductHandler : IRequestHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductHandler : IRequestHandler<CreateCartCommand, CreateProductResult>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Create
         _mapper = mapper;
     }
 
-    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
+    public async Task<CreateProductResult> Handle(CreateCartCommand command, CancellationToken cancellationToken)
     {
         var validator = new CreateProductValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);

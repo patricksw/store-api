@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
-public class CreateProductValidator : AbstractValidator<CreateProductCommand>
+public class CreateProductValidator : AbstractValidator<CreateCartCommand>
 {
     public CreateProductValidator()
     {

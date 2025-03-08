@@ -11,9 +11,9 @@ public class DeleteProductHandler : IRequestHandler<DeleteProductCommand, Delete
 {
     private readonly IProductRepository _productRepository;
 
-    public DeleteProductHandler(IProductRepository userRepository)
+    public DeleteProductHandler(IProductRepository productRepository)
     {
-        _productRepository = userRepository;
+        _productRepository = productRepository;
     }
 
     public async Task<DeleteProductResponse> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
