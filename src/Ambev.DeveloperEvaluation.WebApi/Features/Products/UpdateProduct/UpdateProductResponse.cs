@@ -1,9 +1,9 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using System;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
 
-public class CreateProductResponse
+public class UpdateProductResponse
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = string.Empty;

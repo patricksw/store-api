@@ -2,6 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +26,11 @@ public class ProductRepository : IProductRepository
         return await _context.Products.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 
+    public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Products.ToListAsync(cancellationToken);
+    }
+
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var entity = await GetByIdAsync(id, cancellationToken);
@@ -34,5 +40,16 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
+    }
+
+    public async Task<Product> UpdateAsync(Product product, CancellationToken cancellationToken = default)
+    {
+        var entity = await GetByIdAsync(product.Id, cancellationToken);
+        if (entity is null)
+            return null;
+
+        _context.Entry(entity).CurrentValues.SetValues(product);
+        await _context.SaveChangesAsync(cancellationToken);
+        return product;
     }
 }
