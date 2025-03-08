@@ -1,7 +1,6 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 
 public class CreateProductRequestValidator : AbstractValidator<CreateProductRequest>
 {
