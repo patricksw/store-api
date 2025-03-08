@@ -3,7 +3,7 @@ using System;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct
 {
-    public class CreateProdutctResult
+    public class CreateProductResult
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

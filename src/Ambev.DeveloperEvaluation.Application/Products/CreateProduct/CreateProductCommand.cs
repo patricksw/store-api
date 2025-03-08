@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
-public class CreateProductCommand : IRequest<CreateProdutctResult>
+public class CreateProductCommand : IRequest<CreateProductResult>
 {
     public string Title { get; set; } = string.Empty;
     public decimal Price { get; set; } = 0;
