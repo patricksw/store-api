@@ -2,7 +2,7 @@
 {
     public class Rating
     {
-        public int Rate { get; set; } = 0;
+        public decimal Rate { get; set; } = 0;
         public int Count { get; set; } = 0;
     }
 }
