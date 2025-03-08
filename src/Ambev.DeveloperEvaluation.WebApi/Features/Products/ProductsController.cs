@@ -1,12 +1,15 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
+using Ambev.DeveloperEvaluation.Application.Products.GetAllCategoryProduct;
 using Ambev.DeveloperEvaluation.Application.Products.GetAllProduct;
 using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
+using Ambev.DeveloperEvaluation.Application.Products.GetProductCategory;
 using Ambev.DeveloperEvaluation.Application.Products.UpdateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProductCategory;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
 using AutoMapper;
 using MediatR;
@@ -91,6 +94,46 @@ public class ProductsController : BaseController
             Success = true,
             Message = "Product retrieved successfully",
             Data = _mapper.Map<IEnumerable<GetProductResponse>>(response)
+        });
+    }
+
+    [HttpGet("category/{category}")]
+    [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetProductResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetProductCategory([FromRoute] string category, CancellationToken cancellationToken)
+    {
+        var request = new GetProductCategoryRequest { Category = category };
+        var validator = new GetProductCategoryRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = new GetProductCategoryCommand(category);
+        var response = await _mediator.Send(command, cancellationToken);
+
+        return Ok(new ApiResponseWithData<IEnumerable<GetProductResponse>>
+        {
+            Success = true,
+            Message = "Product retrieved successfully",
+            Data = _mapper.Map<IEnumerable<GetProductResponse>>(response)
+        });
+    }
+
+    [HttpGet("categories")]
+    [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<string>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllCategoryProduct(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllCategoryProductCommand(), cancellationToken);
+
+        return Ok(new ApiResponseWithData<IEnumerable<string>>
+        {
+            Success = true,
+            Message = "Categories retrieved successfully",
+            Data = response
         });
     }
 
