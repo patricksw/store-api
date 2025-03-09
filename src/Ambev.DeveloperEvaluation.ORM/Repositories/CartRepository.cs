@@ -3,6 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 
         public async Task<IEnumerable<Cart>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.Carts.Include(c => c.Products).ToListAsync(cancellationToken);
+            return await _context.Carts.Where(x => !x.Cancelled).Include(c => c.Products).ToListAsync(cancellationToken);
         }
 
         public async Task<Cart> UpdateAsync(Cart cart, CancellationToken cancellationToken = default)
@@ -55,6 +56,15 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             _context.Carts.Remove(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
+            return true;
+        }
+
+        public async Task<bool> CancelAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            await _context.Carts
+                .Where(x => x.Id == id)
+                .ExecuteUpdateAsync(x => x.SetProperty(x => x.Cancelled, true), cancellationToken);
+
             return true;
         }
     }
