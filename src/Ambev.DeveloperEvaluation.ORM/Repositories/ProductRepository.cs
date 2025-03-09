@@ -27,6 +27,12 @@ public class ProductRepository : IProductRepository
         return await _context.Products.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 
+    public async Task<bool> IsContainsProductIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
+    {
+        var productCount = await _context.Products.CountAsync(o => ids.Contains(o.Id), cancellationToken);
+        return productCount == ids.Count();
+    }
+
     public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _context.Products.ToListAsync(cancellationToken);

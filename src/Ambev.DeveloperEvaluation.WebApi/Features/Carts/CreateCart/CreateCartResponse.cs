@@ -8,5 +8,9 @@ public class CreateCartResponse
 {
     public Guid UserId { get; set; }
     public DateTime Date { get; set; } = DateTime.UtcNow;
+    public int Branch { get; set; } = 0;
+    public bool Cancelled { get; set; }
+    public decimal TotalSaleDiscounts { get; set; }
+    public decimal TotalSaleAmount { get; set; }
     public IEnumerable<ItemCartResponse> Products { get; set; } = [];
 }

@@ -15,6 +15,10 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
 
         builder.Property(u => u.UserId).IsRequired().HasColumnType("uuid");
         builder.Property(u => u.Date).IsRequired().HasDefaultValueSql("now()");
+        builder.Property(u => u.Branch).IsRequired().HasDefaultValue(0);
+        builder.Property(u => u.TotalSaleDiscounts).IsRequired().HasDefaultValue(0);
+        builder.Property(u => u.Cancelled).IsRequired().HasDefaultValue(false);
+        builder.Property(u => u.TotalSaleAmount).IsRequired().HasDefaultValue(0);
 
         builder.HasOne(u => u.User)
                .WithMany()

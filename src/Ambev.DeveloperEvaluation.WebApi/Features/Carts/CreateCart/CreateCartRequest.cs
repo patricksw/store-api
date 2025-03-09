@@ -8,5 +8,6 @@ public class CreateCartRequest
 {
     public Guid UserId { get; set; }
     public DateTime Date { get; set; } = DateTime.UtcNow;
+    public int Branch { get; set; } = 0;
     public IEnumerable<ItemCartRequest> Products { get; set; } = [];
 }

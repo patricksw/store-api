@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Carts.CreateCart;
 using Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
+using Ambev.DeveloperEvaluation.Application.Carts.GetAllCart;
 using Ambev.DeveloperEvaluation.Application.Carts.GetCart;
 using Ambev.DeveloperEvaluation.Application.Carts.UpdateCart;
 using Ambev.DeveloperEvaluation.WebApi.Common;
@@ -12,6 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -76,21 +78,21 @@ public class CartsController : BaseController
         });
     }
 
-    //[HttpGet("")]
-    //[ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetCartResponse>>), StatusCodes.Status200OK)]
-    //[ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    //[ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    //public async Task<IActionResult> GetAllCart(CancellationToken cancellationToken)
-    //{
-    //    var response = await _mediator.Send(new GetAllCartCommand(), cancellationToken);
+    [HttpGet("")]
+    [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetCartResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllCart(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllCartCommand(), cancellationToken);
 
-    //    return Ok(new ApiResponseWithData<IEnumerable<GetCartResponse>>
-    //    {
-    //        Success = true,
-    //        Message = "Cart retrieved successfully",
-    //        Data = _mapper.Map<IEnumerable<GetCartResponse>>(response)
-    //    });
-    //}
+        return Ok(new ApiResponseWithData<IEnumerable<GetCartResponse>>
+        {
+            Success = true,
+            Message = "Cart retrieved successfully",
+            Data = _mapper.Map<IEnumerable<GetCartResponse>>(response)
+        });
+    }
 
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(ApiResponseWithData<UpdateCartResponse>), StatusCodes.Status200OK)]

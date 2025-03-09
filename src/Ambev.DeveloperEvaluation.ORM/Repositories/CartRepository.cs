@@ -1,5 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -20,24 +21,41 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             return cart;
         }
 
-        public Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<Cart> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _context.Carts.Include(c => c.Products).FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
         }
 
-        public Task<IEnumerable<Cart>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Cart>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _context.Carts.Include(c => c.Products).ToListAsync(cancellationToken);
         }
 
-        public Task<Cart> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<Cart> UpdateAsync(Cart cart, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var entity = await GetByIdAsync(cart.Id, cancellationToken);
+            if (entity is null)
+                return null;
+
+            _context.ItemCarts.RemoveRange(entity.Products);
+            _context.Carts.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            await CreateAsync(cart, cancellationToken);
+            return cart;
         }
 
-        public Task<Cart> UpdateAsync(Cart cart, CancellationToken cancellationToken = default)
+        public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var entity = await GetByIdAsync(id, cancellationToken);
+            if (entity == null)
+                return false;
+
+            _context.ItemCarts.RemoveRange(entity.Products);
+            _context.Carts.Remove(entity);
+
+            await _context.SaveChangesAsync(cancellationToken);
+            return true;
         }
     }
 }
