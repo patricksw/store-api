@@ -11,8 +11,9 @@ public class UpdateCartCommand : IRequest<UpdateCartResult>
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
-    public DateTime Date { get; set; } = DateTime.UtcNow;
-    public IEnumerable<ItemCartCommand> Products { get; set; } = [];
+    public DateTime Date { get; set; }
+    public int Branch { get; set; }
+    public IEnumerable<ItemCartCommand> Products { get; set; }
 
     public ValidationResultDetail Validate()
     {

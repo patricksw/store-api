@@ -21,4 +21,6 @@ public interface IProductRepository
     Task<IEnumerable<string>> GetAllCategoriesAsync(CancellationToken cancellationToken = default);
 
     Task<IEnumerable<Product>> GetProductByCategoryAsync(string category, CancellationToken cancellationToken = default);
+
+    Task<bool> IsContainsProductIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default);
 }

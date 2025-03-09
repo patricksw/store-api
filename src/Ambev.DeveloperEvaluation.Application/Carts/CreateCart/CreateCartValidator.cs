@@ -9,5 +9,6 @@ public class CreateCartValidator : AbstractValidator<CreateCartCommand>
     {
         RuleFor(e => e.UserId).NotEmpty();
         RuleFor(e => e.Products.Count()).GreaterThan(0);
+        RuleFor(e => e.Branch).GreaterThan(0);
     }
 }
