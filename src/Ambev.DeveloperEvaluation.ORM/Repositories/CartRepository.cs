@@ -9,9 +9,15 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 {
     public class CartRepository : ICartRepository
     {
-        public Task<Cart> CreateAsync(Cart cart, CancellationToken cancellationToken = default)
+        private readonly DefaultContext _context;
+
+        public CartRepository(DefaultContext context) => _context = context;
+
+        public async Task<Cart> CreateAsync(Cart cart, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            await _context.Carts.AddAsync(cart, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            return cart;
         }
 
         public Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)

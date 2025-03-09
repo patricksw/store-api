@@ -7,6 +7,6 @@ public class GetCartProfile : Profile
 {
     public GetCartProfile()
     {
-        CreateMap<Cart, GetCartResult>();
+        CreateMap<Cart, GetCartResult>().ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products));
     }
 }

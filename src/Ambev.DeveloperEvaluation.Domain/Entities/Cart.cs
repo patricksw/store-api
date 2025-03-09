@@ -13,6 +13,8 @@ public class Cart : BaseEntity
     public DateTime Date { get; set; } = DateTime.UtcNow;
     public IEnumerable<ItemCart> Products { get; set; } = [];
 
+    public virtual User User { get; set; }
+
     public ValidationResultDetail Validate()
     {
         var validator = new CartValidator();

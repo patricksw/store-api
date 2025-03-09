@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Common.Validation;
-using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Application.ItemCarts;
+using Ambev.DeveloperEvaluation.Common.Validation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ public class UpdateCartCommand : IRequest<UpdateCartResult>
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
     public DateTime Date { get; set; } = DateTime.UtcNow;
-    public IEnumerable<ItemCart> Products { get; set; } = [];
+    public IEnumerable<ItemCartCommand> Products { get; set; } = [];
 
     public ValidationResultDetail Validate()
     {
