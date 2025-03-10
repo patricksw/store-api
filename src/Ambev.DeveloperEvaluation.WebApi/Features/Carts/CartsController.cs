@@ -14,6 +14,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,11 +28,13 @@ public class CartsController : BaseController
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly ILogger _logger;
 
-    public CartsController(IMediator mediator, IMapper mapper)
+    public CartsController(IMediator mediator, IMapper mapper, ILogger logger)
     {
         _mediator = mediator;
         _mapper = mapper;
+        _logger = logger;
     }
 
     [HttpPost]
@@ -47,6 +50,8 @@ public class CartsController : BaseController
 
         var command = _mapper.Map<CreateCartCommand>(request);
         var response = await _mediator.Send(command, cancellationToken);
+
+        _logger.Information("Sale created successfully");
 
         return Created(string.Empty, new ApiResponseWithData<CreateCartResponse>
         {
@@ -113,6 +118,8 @@ public class CartsController : BaseController
         var command = _mapper.Map<UpdateCartCommand>(request);
         var response = await _mediator.Send(command, cancellationToken);
 
+        _logger.Information("Sale updated successfully");
+
         return Ok(new ApiResponseWithData<UpdateCartResponse>
         {
             Success = true,
@@ -136,6 +143,8 @@ public class CartsController : BaseController
 
         var command = _mapper.Map<CancelCartCommand>(request.Id);
         await _mediator.Send(command, cancellationToken);
+
+        _logger.Information("Sale cancelled successfully");
 
         return Ok(new ApiResponse
         {
