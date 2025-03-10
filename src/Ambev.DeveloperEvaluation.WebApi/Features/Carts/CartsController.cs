@@ -1,9 +1,11 @@
-﻿using Ambev.DeveloperEvaluation.Application.Carts.CreateCart;
+﻿using Ambev.DeveloperEvaluation.Application.Carts.CancelCart;
+using Ambev.DeveloperEvaluation.Application.Carts.CreateCart;
 using Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
 using Ambev.DeveloperEvaluation.Application.Carts.GetAllCart;
 using Ambev.DeveloperEvaluation.Application.Carts.GetCart;
 using Ambev.DeveloperEvaluation.Application.Carts.UpdateCart;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CancelCart;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.DeleteCart;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCart;
@@ -116,6 +118,29 @@ public class CartsController : BaseController
             Success = true,
             Message = "Cart updated successfully",
             Data = _mapper.Map<UpdateCartResponse>(response)
+        });
+    }
+
+    [HttpPut("cancel/{id}")]
+    [ProducesResponseType(typeof(ApiResponseWithData<UpdateCartResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> CancelCart([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var request = new CancelCartRequest { Id = id };
+        var validator = new CancelCartRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = _mapper.Map<CancelCartCommand>(request.Id);
+        await _mediator.Send(command, cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "Cart cancelled successfully"
         });
     }
 
