@@ -1,6 +1,4 @@
-using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,16 +50,5 @@ public class Cart : BaseEntity
                        Quantity = g.Sum(p => p.Quantity),
                        UnitPrice = g.First().UnitPrice
                    })];
-    }
-
-    public ValidationResultDetail Validate()
-    {
-        var validator = new CartValidator();
-        var result = validator.ValidateAsync(this).GetAwaiter().GetResult();
-        return new ValidationResultDetail
-        {
-            IsValid = result.IsValid,
-            Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
-        };
     }
 }

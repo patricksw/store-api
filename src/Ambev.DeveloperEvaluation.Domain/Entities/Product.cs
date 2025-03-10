@@ -1,7 +1,4 @@
-using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Validation;
-using System.Linq;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -14,15 +11,4 @@ public class Product : BaseEntity
     public string Image { get; set; } = string.Empty;
     public decimal RatingRate { get; set; } = 0;
     public int RatingCount { get; set; } = 0;
-
-    public ValidationResultDetail Validate()
-    {
-        var validator = new ProductValidator();
-        var result = validator.Validate(this);
-        return new ValidationResultDetail
-        {
-            IsValid = result.IsValid,
-            Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
-        };
-    }
 }
