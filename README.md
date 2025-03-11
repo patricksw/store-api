@@ -4,7 +4,7 @@
 Ambev Store API is an application to manage sales of a store.
 
 ## Prerequisites
-- [.NET Core SDK](https://dotnet.microsoft.com/download) 3.1 or higher
+- [.NET SDK](https://dotnet.microsoft.com/download) ASP.NET Core Runtime 8.0
 - [Docker](https://www.docker.com/get-started) (optional, for container execution)
 - [Node.js](https://nodejs.org/) (optional, for running test coverage scripts)
 

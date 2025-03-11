@@ -23,13 +23,14 @@ public static class ActiveUserSpecificationTestData
     /// Status is not set here as it's the main test parameter
     /// </summary>
     private static readonly Faker<User> userFaker = new Faker<User>()
-        .CustomInstantiator(f => new User {
+        .CustomInstantiator(f => new User
+        {
             Email = f.Internet.Email(),
             Password = $"Test@{f.Random.Number(100, 999)}",
             Username = f.Name.FirstName(),
             Status = f.PickRandom<UserStatus>(),
             Phone = $"+55{f.Random.Number(11, 99)}{f.Random.Number(100000000, 999999999)}",
-            Role = f.PickRandom<UserRole> ()
+            Role = f.PickRandom<UserRole>()
         });
 
     /// <summary>
