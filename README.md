@@ -78,7 +78,7 @@ Ambev Store API is an application to manage sales of a store.
 
 3. Example of API functionality test:
 
-    ![Users](docs/carts.png)
+    ![Users](docs/users.png)
 
     - Register user:
         - URL: `POST http://localhost:<port>/api/users`
