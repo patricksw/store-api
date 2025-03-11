@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Ambev.DeveloperEvaluation.Functional.Tests
+namespace Ambev.DeveloperEvaluation.Integration.WebApi.Features.Carts
 {
     public class CartsControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
